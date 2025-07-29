@@ -44,3 +44,21 @@ export const captainRegisterService = async ({
 
   return captain;
 };
+
+export const captainLoginService = async ({ email, password }) => {
+  if (!email || !password) {
+    throw new Error("Email and Password is Required!!");
+  }
+
+  const captain = await Captain.findOne({ email }).select("+password");
+  if (!captain) {
+    throw new Error("Invalid Email and Password");
+  }
+
+  const isPassowrdValid = await captain.isPasswordCorrect(password);
+  if (!isPassowrdValid) {
+    throw new Error("Invalid Password! Try again...");
+  }
+
+  return captain;
+};
