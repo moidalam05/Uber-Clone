@@ -493,3 +493,227 @@ Send a JSON object with the following structure:
 - All required fields must be provided and valid.
 - The password is securely hashed before storage.
 - On success, a JWT token is returned for authentication in
+
+---
+
+# Captain Login API Documentation
+
+## Endpoint
+
+`POST /api/v1/captain/login`
+
+## Description
+
+Authenticates a captain using email and password. Returns the captain object and an authentication token upon successful login.
+
+---
+
+## Request Body
+
+Send a JSON object with the following structure:
+
+```json
+{
+  "email": "jane@example.com", // required, must be a valid email
+  "password": "secret123" // required, min 6 characters
+}
+```
+
+---
+
+## Responses
+
+### Success
+
+- **Status Code:** `200 OK`
+- **Body:**
+  ```json
+  {
+    "success": true,
+    "captain": {
+      "_id": "captain_id",
+      "fullname": {
+        "firstname": "Jane",
+        "lastname": "Smith"
+      },
+      "email": "jane@example.com",
+      "socketId": null,
+      "status": "inactive",
+      "vehicle": {
+        "color": "Red",
+        "plate": "ABC123",
+        "capacity": 4,
+        "vehicleType": "car"
+      },
+      "createdAt": "2025-07-28T12:34:56.789Z",
+      "updatedAt": "2025-07-28T12:34:56.789Z"
+    },
+    "token": "jwt_token",
+    "message": "Captain Logged in Successfully"
+  }
+  ```
+
+### Validation Error
+
+- **Status Code:** `400 Bad Request`
+- **Body:**
+  ```json
+  {
+    "success": false,
+    "errors": [
+      {
+        "msg": "Invalid Email",
+        "param": "email",
+        "location": "body"
+      }
+      // ...other errors
+    ]
+  }
+  ```
+
+### Invalid Credentials
+
+- **Status Code:** `401 Unauthorized`
+- **Body:**
+  ```json
+  {
+    "success": false,
+    "message": "Invalid Email and Password"
+  }
+  ```
+  or
+  ```json
+  {
+    "success": false,
+    "message": "Invalid Password! Try again..."
+  }
+  ```
+
+---
+
+## Notes
+
+- Both fields are required.
+- On success, a JWT token is returned for authentication in future requests.
+
+---
+
+# Captain Profile API Documentation
+
+## Endpoint
+
+`GET /api/v1/captain/profile`
+
+## Description
+
+Fetches the authenticated captain's profile information. Requires a valid authentication token (JWT) to be sent in the request cookies.
+
+---
+
+## Request
+
+- **Headers:**
+  - `Cookie: authToken=jwt_token` (required)
+
+---
+
+## Responses
+
+### Success
+
+- **Status Code:** `200 OK`
+- **Body:**
+  ```json
+  {
+    "success": true,
+    "captain": {
+      "_id": "captain_id",
+      "fullname": {
+        "firstname": "Jane",
+        "lastname": "Smith"
+      },
+      "email": "jane@example.com",
+      "socketId": null,
+      "status": "inactive",
+      "vehicle": {
+        "color": "Red",
+        "plate": "ABC123",
+        "capacity": 4,
+        "vehicleType": "car"
+      },
+      "createdAt": "2025-07-28T12:34:56.789Z",
+      "updatedAt": "2025-07-28T12:34:56.789Z"
+    },
+    "message": "Captain Profile Fetched Successfully"
+  }
+  ```
+
+### Unauthorized
+
+- **Status Code:** `401 Unauthorized`
+- **Body:**
+  ```json
+  {
+    "success": false,
+    "message": "Authentication required" // or a similar error message
+  }
+  ```
+
+---
+
+## Notes
+
+- This endpoint is protected and requires authentication.
+- Returns the captain's profile data if the token is valid.
+
+---
+
+# Captain Logout API Documentation
+
+## Endpoint
+
+`POST /api/v1/captain/logout`
+
+## Description
+
+Logs out the authenticated captain by clearing the authentication token cookie.
+
+---
+
+## Request
+
+- **Headers:**
+  - `Cookie: authToken=jwt_token` (required)
+
+---
+
+## Responses
+
+### Success
+
+- **Status Code:** `200 OK`
+- **Body:**
+  ```json
+  {
+    "success": true,
+    "message": "Captain Logged out Successfully"
+  }
+  ```
+
+### Unauthorized
+
+- **Status Code:** `400 Bad Request` or `401 Unauthorized`
+- **Body:**
+  ```json
+  {
+    "success": false,
+    "message": "Authentication required" // or a similar error message
+  }
+  ```
+
+---
+
+## Notes
+
+- This endpoint is protected and requires authentication.
+- On success, the authentication cookie is cleared and the captain is
