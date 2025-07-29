@@ -17,10 +17,10 @@ Router.route("/register").post(
       .isLength({ min: 3 })
       .withMessage("Color must be atleast 3 characters long"),
     body("vehicle.plate")
-      .isLength({ min3 })
+      .isLength({ min: 3 })
       .withMessage("Plate must be atleast 3 characters long"),
     body("vehicle.capacity")
-      .isIn({ min: 1 })
+      .isInt({ min: 1 })
       .withMessage("Capacity must be 1 atleast"),
     body("vehicle.vehicleType")
       .isIn(["car", "motorcycle", "auto"])
