@@ -17,11 +17,11 @@ Send a JSON object with the following structure:
 ```json
 {
   "fullname": {
-    "firstname": "John",      // required, min 3 characters
-    "lastname": "Doe"         // optional, min 3 characters if provided
+    "firstname": "John", // required, min 3 characters
+    "lastname": "Doe" // optional, min 3 characters if provided
   },
   "email": "john@example.com", // required, must be a valid email
-  "password": "secret123"      // required, min 6 characters
+  "password": "secret123" // required, min 6 characters
 }
 ```
 
@@ -106,11 +106,11 @@ Send a JSON object with the following structure:
 ```json
 {
   "fullname": {
-    "firstname": "John",      // required, min 3 characters
-    "lastname": "Doe"         // optional, min 3 characters if provided
+    "firstname": "John", // required, min 3 characters
+    "lastname": "Doe" // optional, min 3 characters if provided
   },
   "email": "john@example.com", // required, must be a valid email
-  "password": "secret123"      // required, min 6 characters
+  "password": "secret123" // required, min 6 characters
 }
 ```
 
@@ -178,9 +178,7 @@ Send a JSON object with the following structure:
 - The password is securely hashed before storage.
 - On success, a JWT token is returned for authentication in future
 
-
 ---
-
 
 # User Login API Documentation
 
@@ -200,8 +198,8 @@ Send a JSON object with the following structure:
 
 ```json
 {
-  "email": "john@example.com",   // required, must be a valid email
-  "password": "secret123"        // required, min 6 characters
+  "email": "john@example.com", // required, must be a valid email
+  "password": "secret123" // required, min 6 characters
 }
 ```
 
@@ -291,7 +289,7 @@ Fetches the authenticated user's profile information. Requires a valid authentic
 
 ## Request
 
-- **Headers:**  
+- **Headers:**
   - `Cookie: authToken=jwt_token` (required)
 
 ---
@@ -354,7 +352,7 @@ Logs out the authenticated user by clearing the authentication token cookie.
 
 ## Request
 
-- **Headers:**  
+- **Headers:**
   - `Cookie: authToken=jwt_token` (required)
 
 ---
@@ -389,3 +387,109 @@ Logs out the authenticated user by clearing the authentication token cookie.
 
 - This endpoint is protected and requires authentication.
 - On success, the authentication cookie is cleared and the user is logged out.
+
+---
+
+# Captain Registration API Documentation
+
+## Endpoint
+
+`POST /api/v1/captain/register`
+
+## Description
+
+Registers a new captain (driver) in the system. Requires valid personal and vehicle details. Returns the created captain object and an authentication token upon success.
+
+---
+
+## Request Body
+
+Send a JSON object with the following structure:
+
+```json
+{
+  "fullname": {
+    "firstname": "Jane", // required, min 3 characters
+    "lastname": "Smith" // optional, min 3 characters if provided
+  },
+  "email": "jane@example.com", // required, must be a valid email
+  "password": "secret123", // required, min 6 characters
+  "vehicle": {
+    "color": "Red", // required, min 3 characters
+    "plate": "ABC123", // required, min 3 characters
+    "capacity": 4, // required, integer >= 1
+    "vehicleType": "car" // required, one of: "car", "motorcycle", "auto"
+  }
+}
+```
+
+---
+
+## Responses
+
+### Success
+
+- **Status Code:** `201 Created`
+- **Body:**
+  ```json
+  {
+    "success": true,
+    "captain": {
+      "_id": "captain_id",
+      "fullname": {
+        "firstname": "Jane",
+        "lastname": "Smith"
+      },
+      "email": "jane@example.com",
+      "socketId": null,
+      "status": "inactive",
+      "vehicle": {
+        "color": "Red",
+        "plate": "ABC123",
+        "capacity": 4,
+        "vehicleType": "car"
+      },
+      "createdAt": "2025-07-28T12:34:56.789Z",
+      "updatedAt": "2025-07-28T12:34:56.789Z"
+    },
+    "token": "jwt_token",
+    "message": "Captain Registred Successfully"
+  }
+  ```
+
+### Validation Error
+
+- **Status Code:** `400 Bad Request`
+- **Body:**
+  ```json
+  {
+    "success": false,
+    "errors": [
+      {
+        "msg": "Invalid Email",
+        "param": "email",
+        "location": "body"
+      }
+      // ...other errors
+    ]
+  }
+  ```
+
+### Duplicate Email
+
+- **Status Code:** `400 Bad Request`
+- **Body:**
+  ```json
+  {
+    "success": false,
+    "message": "Captain already exists"
+  }
+  ```
+
+---
+
+## Notes
+
+- All required fields must be provided and valid.
+- The password is securely hashed before storage.
+- On success, a JWT token is returned for authentication in
