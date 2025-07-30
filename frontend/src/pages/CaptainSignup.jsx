@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const CaptainSignup = () => {
-  return (
-    <div>CaptainSignup</div>
-  )
-}
+  return <div>CaptainSignup</div>;
+};
 
-export default CaptainSignup
+export default CaptainSignup;
