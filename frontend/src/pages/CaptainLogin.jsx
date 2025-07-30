@@ -5,20 +5,25 @@ import { FaArrowRight } from "react-icons/fa";
 import { FaUserTie } from "react-icons/fa6";
 
 const CaptainLogin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [captainData, setCaptainData] = useState({});
+  const [captainData, setCaptainData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCaptainData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setCaptainData({
-      email: email,
-      password: password,
-    });
+
     console.log(captainData);
 
-    setEmail("");
-    setPassword("");
+    setCaptainData({
+      email: "",
+      password: "",
+    });
   };
   return (
     <div className="p-8 h-screen flex flex-col justify-between bg-gradient-to-tr from-[#f0f4ff] via-[#f8faff] to-white">
@@ -36,8 +41,8 @@ const CaptainLogin = () => {
             name="email"
             placeholder="email@example.com"
             autoComplete="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={captainData.email}
+            onChange={handleChange}
           />
           <label htmlFor="password" className="flex text-lg font-medium mb-2">
             What's your password
@@ -50,8 +55,8 @@ const CaptainLogin = () => {
             name="password"
             placeholder="password"
             autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={captainData.password}
+            onChange={handleChange}
           />
           <button className="bg-[#111] relative flex items-center justify-center text-white font-semibold rounded-md px-4 py-2 w-full text-lg mb-3">
             Login{" "}
