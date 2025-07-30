@@ -70,13 +70,12 @@ const UserSignup = () => {
           </p>
         </form>
       </div>
-      <div>
-        <p className="text-xs leading-tight text-center">
-          By proceeding, you consent to get calls, WhatsApp or SMS messages,
-          including by automated means, from Uber and its affiliates to the
-          number provided.
-        </p>
-      </div>
+
+      <p className="text-xs leading-tight text-center">
+        By proceeding, you consent to get calls, WhatsApp or SMS messages,
+        including by automated means, from Uber and its affiliates to the number
+        provided.
+      </p>
     </div>
   );
 };
