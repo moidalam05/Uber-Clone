@@ -8,7 +8,7 @@ import CaptainSignup from "./pages/CaptainSignup";
 
 const App = () => {
   return (
-    <div>
+    <>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<UserLogin />} />
@@ -16,7 +16,7 @@ const App = () => {
         <Route path="/captain-login" element={<CaptainLogin />} />
         <Route path="/captain-signup" element={<CaptainSignup />} />
       </Routes>
-    </div>
+    </>
   );
 };
 
