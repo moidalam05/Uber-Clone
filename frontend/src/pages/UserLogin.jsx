@@ -5,20 +5,24 @@ import { FaArrowRight } from "react-icons/fa";
 import { FaCarSide } from "react-icons/fa";
 
 const UserLogin = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    setUserData({
-      email: email,
-      password: password,
-    });
-    console.log(userData);
 
-    setEmail("");
-    setPassword("");
+    console.log(userData);
+    setUserData({
+      email: "",
+      password: "",
+    });
   };
 
   return (
@@ -37,8 +41,8 @@ const UserLogin = () => {
             name="email"
             placeholder="email@example.com"
             autoComplete="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={userData.email}
+            onChange={handleChange}
           />
           <label htmlFor="password" className="flex text-lg font-medium mb-2">
             What's your password
@@ -51,8 +55,8 @@ const UserLogin = () => {
             name="password"
             placeholder="password"
             autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={userData.password}
+            onChange={handleChange}
           />
           <button className="bg-[#111] relative flex items-center justify-center text-white font-semibold rounded-md px-4 py-2 w-full text-lg mb-3">
             Login{" "}
