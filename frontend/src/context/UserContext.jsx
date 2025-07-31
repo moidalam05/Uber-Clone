@@ -9,12 +9,11 @@ const UserContext = ({ children }) => {
       lastname: "",
     },
     email: "",
-    password: "",
   });
 
   return (
     <div>
-      <UserDataContext.Provider value={[user, setUser]}>
+      <UserDataContext.Provider value={{ user, setUser }}>
         {children}
       </UserDataContext.Provider>
     </div>
@@ -22,3 +21,4 @@ const UserContext = ({ children }) => {
 };
 
 export default UserContext;
+export { UserDataContext };
