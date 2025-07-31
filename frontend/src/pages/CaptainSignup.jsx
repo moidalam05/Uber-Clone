@@ -5,23 +5,40 @@ import { FaArrowRight } from "react-icons/fa";
 
 const CaptainSignup = () => {
   const [userData, setUserData] = useState({
-    firstname: "",
-    lastname: "",
+    fullname: {
+      firstname: "",
+      lastname: "",
+    },
     email: "",
     password: "",
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserData((prev) => ({ ...prev, [name]: value }));
+    if (name === "firstname" || name === "lastname") {
+      setUserData((prev) => ({
+        ...prev,
+        fullname: {
+          ...prev.fullname,
+          [name]: value,
+        },
+      }));
+    } else {
+      setUserData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
     console.log(userData);
     setUserData({
-      firstname: "",
-      lastname: "",
+      fullname: {
+        firstname: "",
+        lastname: "",
+      },
       email: "",
       password: "",
     });
@@ -45,7 +62,7 @@ const CaptainSignup = () => {
               name="firstname"
               placeholder="First name"
               autoComplete="given-name"
-              value={userData.firstname}
+              value={userData.fullname.firstname}
               onChange={handleChange}
             />
             <input
@@ -55,7 +72,7 @@ const CaptainSignup = () => {
               name="lastname"
               placeholder="Last name"
               autoComplete="given-name"
-              value={userData.lastname}
+              value={userData.fullname.lastname}
               onChange={handleChange}
             />
           </div>
