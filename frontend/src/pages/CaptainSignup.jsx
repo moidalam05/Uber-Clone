@@ -51,7 +51,7 @@ const CaptainSignup = () => {
         </Link>
         <form onSubmit={(e) => submitHandler(e)}>
           <label className="flex text-base font-medium mb-2">
-            What's your name
+            What's our captain's name
           </label>
           <div className="flex gap-4 mb-6">
             <input
@@ -77,7 +77,7 @@ const CaptainSignup = () => {
             />
           </div>
           <label htmlFor="email" className="flex text-base font-medium mb-2">
-            What's your email
+            What's our captain's email
           </label>
           <input
             className="bg-[#f5f6fa] border border-gray-200 focus:outline-none focus:ring focus:ring-blue-100 rounded-md px-4 py-2 w-full text-base placeholder:text-sm mb-6"
@@ -91,7 +91,7 @@ const CaptainSignup = () => {
             onChange={handleChange}
           />
           <label htmlFor="password" className="flex text-base font-medium mb-2">
-            What's your password
+            What's our captain's password
           </label>
           <input
             className="bg-[#f5f6fa] border border-gray-200 focus:outline-none focus:ring focus:ring-blue-100 rounded-md px-4 py-2 w-full text-base placeholder:text-sm mb-6"
