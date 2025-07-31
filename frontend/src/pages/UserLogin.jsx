@@ -28,7 +28,9 @@ const UserLogin = () => {
   return (
     <div className="p-8 h-screen flex flex-col justify-between bg-gradient-to-tr from-[#f0f4ff] via-[#f8faff] to-white">
       <div>
-        <img className="w-16 mb-10" src={uberLogo} alt="logo" />
+        <Link className="flex w-16 mb-10" to="/">
+          <img src={uberLogo} alt="logo" />
+        </Link>
         <form onSubmit={(e) => submitHandler(e)}>
           <label htmlFor="email" className="flex text-lg font-medium mb-2">
             What's your email

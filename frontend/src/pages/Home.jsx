@@ -8,9 +8,11 @@ const Home = () => {
     <div>
       <div
         style={{ backgroundImage: `url(${bgImage})` }}
-        className="bg-cover bg-center h-screen w-full pt-8 flex justify-between flex-col bg-red-400"
+        className="bg-cover bg-center h-screen w-full pt-8 flex justify-between flex-col"
       >
-        <img className="w-16 ml-8" src={uberLogo} alt="logo" />
+        <Link to="/">
+          <img className="w-16 ml-8" src={uberLogo} alt="logo" />
+        </Link>
         <div className="bg-white py-4 px-4 pb-8">
           <h2 className="text-3xl font-bold">Get started with Uber</h2>
           <Link
