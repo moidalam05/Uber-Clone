@@ -6,7 +6,7 @@ import axios from "axios";
 import { CaptainDataContext } from "../context/CaptainContext";
 
 const CaptainSignup = () => {
-  const navigate = useNavigate;
+  const navigate = useNavigate();
   const [captainData, setCaptainData] = useState({
     fullname: {
       firstname: "",
@@ -73,7 +73,6 @@ const CaptainSignup = () => {
       console.log(error);
     }
 
-    console.log(captainData);
     setCaptainData({
       fullname: {
         firstname: "",

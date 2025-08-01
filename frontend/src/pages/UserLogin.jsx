@@ -32,10 +32,8 @@ const UserLogin = () => {
       if (response.status === 200) {
         const data = response.data;
         setUser(data.user);
-        console.log(data.user);
-
         localStorage.setItem("authToken", JSON.stringify(data.token));
-        navigate("/home");
+        navigate("/user-dashboard");
       }
     } catch (error) {
       if (error.response.status === 400) {
@@ -45,7 +43,6 @@ const UserLogin = () => {
       }
     }
 
-    console.log(userData);
     setUserData({
       email: "",
       password: "",
