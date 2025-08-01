@@ -160,7 +160,7 @@ const CaptainSignup = () => {
               id="color"
               name="color"
               placeholder="Vehicle color"
-              autoComplete="color"
+              autoComplete="off"
               value={captainData.vehicle.color}
               onChange={handleChange}
             />
@@ -170,7 +170,7 @@ const CaptainSignup = () => {
               id="plate"
               name="plate"
               placeholder="Vehicle plate"
-              autoComplete="plate"
+              autoComplete="off"
               value={captainData.vehicle.plate}
               onChange={handleChange}
             />
@@ -180,7 +180,7 @@ const CaptainSignup = () => {
               id="capacity"
               name="capacity"
               placeholder="Vehicle capacity"
-              autoComplete="capacity"
+              autoComplete="off"
               value={captainData.vehicle.capacity}
               onChange={handleChange}
             />
