@@ -39,15 +39,20 @@ const UserSignup = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
 
-    const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/user/register`,
-      userData
-    );
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/user/register`,
+        userData
+      );
 
-    if (response.status === 201) {
-      const data = response.data;
-      setUser(data.user);
-      navigate("/home");
+      if (response.status === 201) {
+        const data = response.data;
+        setUser(data.user);
+        localStorage.setItem("authToken", JSON.stringify(data.token));
+        navigate("/home");
+      }
+    } catch (error) {
+      console.log(error.response.data.message);
     }
 
     setUserData({

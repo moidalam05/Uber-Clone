@@ -1,22 +1,49 @@
-import React, { useState } from "react";
+import { useState, useContext } from "react";
 import uberLogo from "../assets/Uber-logo-B.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaArrowRight } from "react-icons/fa";
 import { FaCarSide } from "react-icons/fa";
+import axios from "axios";
+import { UserDataContext } from "../context/UserContext";
 
 const UserLogin = () => {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: "",
     password: "",
   });
+
+  const { setUser } = useContext(UserDataContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BASE_URL}/user/login`,
+        userData
+      );
+
+      if (response.status === 200) {
+        const data = response.data;
+        setUser(data.user);
+        console.log(data.user);
+
+        localStorage.setItem("authToken", JSON.stringify(data.token));
+        navigate("/home");
+      }
+    } catch (error) {
+      if (error.response.status === 400) {
+        console.log(error.response.data.errors[0].msg);
+      } else {
+        console.log(error.response.data.message);
+      }
+    }
 
     console.log(userData);
     setUserData({
