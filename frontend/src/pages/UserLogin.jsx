@@ -85,7 +85,7 @@ const UserLogin = () => {
             onChange={handleChange}
           />
           <button className="bg-[#111] relative flex items-center justify-center text-white font-semibold rounded-md px-4 py-2 w-full text-lg mb-3">
-            Login{" "}
+            User Login{" "}
             <i className="absolute font-bold right-5">
               <FaArrowRight />
             </i>
