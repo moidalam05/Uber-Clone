@@ -13,8 +13,7 @@ const CaptainLogin = () => {
     password: "",
   });
 
-  const { captain, setCaptain } = useContext(CaptainDataContext);
-  console.log(captain);
+  const { setCaptain } = useContext(CaptainDataContext);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
